@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 
 dotenv.config();
 
@@ -9,18 +9,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const openai = new OpenAIApi(
-  new Configuration({ apiKey: process.env.OPENAI_API_KEY })
-);
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
 
 app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
-    const response = await openai.createChatCompletion({
+    const response = await openai.chat.completions.create({
       model: "gpt-4",
-      messages: [{ role: "system", content: "Tu sei Carla, un chatbot amichevole e utile." }, { role: "user", content: message }],
+      messages: [
+        { role: "system", content: "Tu sei Carla, un chatbot amichevole e utile." },
+        { role: "user", content: message }
+      ],
     });
-    res.json({ reply: response.data.choices[0].message.content });
+
+    res.json({ reply: response.choices[0].message.content });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
