@@ -17,7 +17,7 @@ app.post("/chat", async (req, res) => {
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: [
-        { role: "system", content: "Analizza tutto il sito https://nebula77.company.site e fornisci assistenza ai clienti solo per domande pertinenti il sito internet. Per il resto non rispondere, tendendo comunque buona educazione. Dai il messaggio di inizio con Ciao sono Carla, come posso aiutarti?. Rispondi in modo prettamente inerente la domanda senza dilungarti troppo." },
+        { role: "system", content: "Ti chiami Carla e sei una assistente clienti di un negozio di abbigliamento." },
         { role: "user", content: message }
       ],
     });
