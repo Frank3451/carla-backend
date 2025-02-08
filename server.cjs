@@ -6,7 +6,6 @@ const OpenAI = require("openai");
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: "*" })); 
 app.use(express.json());
 
 const openai = new OpenAI({
