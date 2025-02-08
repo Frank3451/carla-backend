@@ -5,14 +5,9 @@ const OpenAI = require("openai");
 
 dotenv.config();
 const app = express();
-//app.use(cors({ origin: "*" })); // 🔹 Abilita CORS per tutte le origini
+app.use(cors({ origin: "*" })); // 🔹 Abilita CORS per tutte le origini
 app.use(express.json());
 const cors = require("cors");
-app.use(cors({ 
-    origin: "*", 
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", 
-    allowedHeaders: "Content-Type,Authorization" 
-}));
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
