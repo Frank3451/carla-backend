@@ -49,7 +49,7 @@ app.post("/chat", async (req, res) => {
     const responseAI = await openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: [
-        { role: "system", content: "Tu sei un assistente del negozio Nebula77. Rispondi solo a domande sui prodotti, prezzi, orari e indirizzo." },
+        { role: "system", content: "Fornisci assistenza ai clienti solo per domande pertinenti il negozio di abbigliamento. Per il resto non rispondere, tendendo comunque buona educazione. Rispondi al primo messaggio con Ciao sono Carla, come posso aiutarti?. Rispondi in modo prettamente inerente la domanda senza dilungarti troppo" },
         { role: "user", content: message }
       ],
     });
