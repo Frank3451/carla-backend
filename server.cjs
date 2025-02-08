@@ -14,8 +14,8 @@ const openai = new OpenAI({
 });
 
 // 👉 Inserisci qui il tuo Store ID e Token Pubblico di Ecwid
-const ECWID_STORE_ID = "TUO_STORE_ID";
-const ECWID_TOKEN = "TUO_TOKEN_PUBBLICO";
+const ECWID_STORE_ID = 112208810;
+const ECWID_TOKEN = public_d1kqevj22iXNH8b9arhK1JhLh7qvA1SD;
 
 // 👉 Funzione per ottenere prodotti da Ecwid
 async function getProducts() {
