@@ -35,15 +35,17 @@ app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body.toLowerCase();
 
-    // 👉 Se l'utente chiede l'indirizzo o gli orari, Carla li prende da Ecwid
-    if (message.includes("indirizzo") || message.includes("orari") || message.includes("dove siete")) {
+    if (message.includes("indirizzo") || message.includes("orari")) {
       const storeDetails = await getStoreDetails();
-      const address = storeDetails.company?.address || "Indirizzo non disponibile";
-      const openingHours = storeDetails.company?.openingHours || "Orari non disponibili";
+
+      // Verifica se i dati esistono, altrimenti usa un valore predefinito
+      const address = storeDetails?.company?.address || "Indirizzo non disponibile";
+      const openingHours = storeDetails?.company?.openingHours || "Orari non disponibili";
+
       return res.json({ reply: `Ci trovi in: ${address}. Orari: ${openingHours}` });
     }
 
-    // 👉 Se la domanda non riguarda indirizzo/orari, Carla usa GPT-4 Turbo
+    // Se la domanda è diversa, usa GPT-4 Turbo
     const responseAI = await openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: [
@@ -55,6 +57,7 @@ app.post("/chat", async (req, res) => {
     res.json({ reply: responseAI.choices[0].message.content });
 
   } catch (error) {
+    console.error("Errore nel chatbot:", error);
     res.status(500).json({ error: error.message });
   }
 });
