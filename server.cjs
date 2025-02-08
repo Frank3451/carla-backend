@@ -63,8 +63,3 @@ app.post("/chat", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server in ascolto su porta ${PORT}`));
-
-
-const PORT = process.env.PORT || 3000; // ✅ Definito UNA SOLA VOLTA
-app.listen(PORT, () => console.log(`Server in ascolto su porta ${PORT}`));
-
